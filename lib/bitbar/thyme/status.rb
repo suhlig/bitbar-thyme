@@ -9,7 +9,14 @@ module Bitbar
       end
 
       def summary
-        @status
+        case @status
+        when 'Pomodoro'
+          '🍅'
+        when 'Break'
+          '🍏'
+        else
+          @status
+        end
       end
 
       def details

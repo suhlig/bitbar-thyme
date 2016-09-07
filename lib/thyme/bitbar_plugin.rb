@@ -37,7 +37,7 @@ module Thyme
     attr_reader :config
 
     def status
-      config.break ? '🍏' : '🍅'
+      config.break ? 'Break' : 'Pomodoro'
     end
   end
 end

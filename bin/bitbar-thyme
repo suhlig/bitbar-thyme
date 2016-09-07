@@ -1,6 +1,4 @@
-#!/usr/bin/env ruby
-# frozen_string_literal: true
-#
+#!/usr/bin/env bash
 # <bitbar.title>Thyme</bitbar.title>
 # <bitbar.version>v1.0</bitbar.version>
 # <bitbar.author>Steffen Uhlig</bitbar.author>
@@ -10,12 +8,8 @@
 # <bitbar.image>https://raw.githubusercontent.com/suhlig/bitbar-thyme/master/screenshot.png</bitbar.image>
 # <bitbar.abouturl>http://github.com/suhlig/bitbar-thyme</bitbar.abouturl>
 
-$LOAD_PATH.unshift File.join(__dir__, '..', 'lib')
+export PATH=/usr/local/bin:$PATH
+source $(brew --prefix)/share/chruby/chruby.sh
+chruby 2.3.1
 
-require 'bitbar/thyme'
-
-status = Bitbar::Thyme::Status.new
-
-puts status.summary
-puts '---'
-puts status.details
+bitbar-thyme
