@@ -10,9 +10,6 @@
 # <bitbar.image>https://raw.githubusercontent.com/suhlig/bitbar-thyme/master/screenshot.png</bitbar.image>
 # <bitbar.abouturl>http://github.com/suhlig/bitbar-thyme</bitbar.abouturl>
 
-require 'bundler'
-Bundler.setup
-
 require 'bitbar/thyme'
 
 status = Bitbar::Thyme::Status.new
