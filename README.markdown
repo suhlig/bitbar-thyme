@@ -5,8 +5,10 @@
 Assuming `~/.bitbar` is your plugins folder:
 
 ```
-cp contrib/bitbar-thyme ~/.bitbar/bitbar-thyme.1s
+cp contrib/thyme.1s.sh ~/.bitbar/
 ```
+
+It seems necessary to have the `.sh` extension in order to make bitbar pick up the auto-refresh interval.
 
 ## Development
 
