@@ -6,8 +6,13 @@ describe Bitbar::Thyme::Status do
 
   context 'within a pomodoro' do
     let(:status_file) { fixture('pomodoro-863.yml') }
+
     it 'exists' do
       expect(subject).to be
+    end
+
+    it 'has the current status' do
+      expect(subject.summary).to include('🍅')
     end
 
     it 'has duration' do
@@ -31,8 +36,13 @@ describe Bitbar::Thyme::Status do
 
   context 'within a break' do
     let(:status_file) { fixture('break-281.yml') }
+
     it 'exists' do
       expect(subject).to be
+    end
+
+    it 'has the current status' do
+      expect(subject.summary).to include('🍏')
     end
 
     it 'has duration' do
