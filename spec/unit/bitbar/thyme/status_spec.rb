@@ -63,4 +63,30 @@ describe Bitbar::Thyme::Status do
       expect(subject.details).to include('0:19')
     end
   end
+
+  context 'after a pomodoro' do
+    let(:status_file) { fixture('after-pomodoro-247.yml') }
+
+    it 'has the current status' do
+      expect(subject.summary).to eq('Idle')
+    end
+
+    it 'has the previous status' do
+      expect(subject.details).to include('Pomodoro')
+      expect(subject.details).to include('4:07')
+    end
+  end
+
+  context 'after a break' do
+    let(:status_file) { fixture('after-break-142.yml') }
+
+    it 'has the current status' do
+      expect(subject.summary).to eq('Idle')
+    end
+
+    it 'has the previous status' do
+      expect(subject.details).to include('Break')
+      expect(subject.details).to include('2:22')
+    end
+  end
 end
