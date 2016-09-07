@@ -2,29 +2,55 @@
 require 'spec_helper'
 
 describe Bitbar::Thyme::Status do
-  subject {
-    Bitbar::Thyme::Status.new(fixture('pomodoro-863.yml'))
-  }
+  subject { Bitbar::Thyme::Status.new(status_file) }
 
-  it 'exists' do
-    expect(subject).to be
+  context 'within a pomodoro' do
+    let(:status_file) { fixture('pomodoro-863.yml') }
+    it 'exists' do
+      expect(subject).to be
+    end
+
+    it 'has duration' do
+      expect(subject.total_duration).to eq(1500)
+    end
+
+    it 'has seconds left' do
+      expect(subject.total_seconds_left).to eq(863)
+      expect(subject.minutes_left).to eq(14)
+      expect(subject.seconds_left).to eq(23)
+      expect(subject.summary).to include('14:23')
+    end
+
+    it 'has seconds elapsed' do
+      expect(subject.total_seconds_elapsed).to eq(637)
+      expect(subject.minutes_elapsed).to eq(10)
+      expect(subject.seconds_elapsed).to eq(37)
+      expect(subject.details).to include('10:37')
+    end
   end
 
-  it 'has duration' do
-    expect(subject.total_duration).to eq(1500)
-  end
+  context 'within a break' do
+    let(:status_file) { fixture('break-281.yml') }
+    it 'exists' do
+      expect(subject).to be
+    end
 
-  it 'has seconds left' do
-    expect(subject.total_seconds_left).to eq(863)
-    expect(subject.minutes_left).to eq(14)
-    expect(subject.seconds_left).to eq(23)
-    expect(subject.summary).to eq('🍅  14:23')
-  end
+    it 'has duration' do
+      expect(subject.total_duration).to eq(300)
+    end
 
-  it 'has seconds elapsed' do
-    expect(subject.total_seconds_elapsed).to eq(637)
-    expect(subject.minutes_elapsed).to eq(10)
-    expect(subject.seconds_elapsed).to eq(37)
-    expect(subject.details).to eq('Pomodoro running for 10:37')
+    it 'has seconds left' do
+      expect(subject.total_seconds_left).to eq(281)
+      expect(subject.minutes_left).to eq(4)
+      expect(subject.seconds_left).to eq(41)
+      expect(subject.summary).to include('4:41')
+    end
+
+    it 'has seconds elapsed' do
+      expect(subject.total_seconds_elapsed).to eq(19)
+      expect(subject.minutes_elapsed).to eq(0)
+      expect(subject.seconds_elapsed).to eq(19)
+      expect(subject.details).to include('0:19')
+    end
   end
 end
