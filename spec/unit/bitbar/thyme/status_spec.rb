@@ -64,29 +64,50 @@ describe Bitbar::Thyme::Status do
     end
   end
 
-  context 'after a pomodoro' do
-    let(:status_file) { fixture('after-pomodoro-247.yml') }
+  context 'with zero seconds left' do
+    context 'after a pomodoro' do
+      let(:status_file) { fixture('idle-after-pomodoro-0.yml') }
 
-    it 'has the current status' do
-      expect(subject.summary).to eq('Idle')
-    end
+      it 'has the duration of the previous pomodoro' do
+        expect(subject.previous_duration).to eq('25:00')
+      end
 
-    it 'has the previous status' do
-      expect(subject.details).to include('Pomodoro')
-      expect(subject.details).to include('4:07')
+      it 'has the current status' do
+        expect(subject.summary).to eq('Idle')
+      end
+
+      it 'has the previous status' do
+        expect(subject.details).to include('Pomodoro')
+        expect(subject.details).to include('25:00')
+      end
     end
   end
 
-  context 'after a break' do
-    let(:status_file) { fixture('after-break-142.yml') }
+  context 'with some seconds left' do
+    context 'after a pomodoro' do
+      let(:status_file) { fixture('idle-after-pomodoro-247.yml') }
 
-    it 'has the current status' do
-      expect(subject.summary).to eq('Idle')
+      it 'has the current status' do
+        expect(subject.summary).to eq('Idle')
+      end
+
+      it 'has the previous status' do
+        expect(subject.details).to include('Pomodoro')
+        expect(subject.details).to include('4:07')
+      end
     end
 
-    it 'has the previous status' do
-      expect(subject.details).to include('Break')
-      expect(subject.details).to include('2:22')
+    context 'after a break' do
+      let(:status_file) { fixture('idle-after-break-142.yml') }
+
+      it 'has the current status' do
+        expect(subject.summary).to eq('Idle')
+      end
+
+      it 'has the previous status' do
+        expect(subject.details).to include('Break')
+        expect(subject.details).to include('2:22')
+      end
     end
   end
 end

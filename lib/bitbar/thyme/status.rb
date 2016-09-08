@@ -24,12 +24,20 @@ module Bitbar
       def details
         case status
         when 'Idle'
-          "#{status} after #{time_left} of #{previous_status}"
+          if complete?
+            "#{status} after #{previous_duration} of #{previous_status}"
+          else
+            "#{status} after #{time_left} of #{previous_status}"
+          end
         when 'Pomodoro', 'Break'
           "#{status} running for #{time_elapsed}"
         else
           'Unknown'
         end
+      end
+
+      def complete?
+        total_seconds_left.zero?
       end
 
       def time_elapsed
@@ -60,8 +68,8 @@ module Bitbar
         total_duration - total_seconds_left
       end
 
-      def total_duration
-        case status
+      def total_duration(of=status)
+        case of
         when 'Pomodoro'
           25 * 60
         when 'Break'
@@ -69,6 +77,13 @@ module Bitbar
         else
           0
         end
+      end
+
+      def previous_duration
+        total = total_duration(previous_status)
+        minutes = total / 60
+        seconds = total % 60
+        "#{minutes}:#{sprintf('%02d', seconds)}"
       end
     end
   end
