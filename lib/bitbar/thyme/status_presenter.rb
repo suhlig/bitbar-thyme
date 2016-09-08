@@ -1,13 +1,14 @@
 # frozen_string_literal: true
-require 'thyme/status_file'
 
 module Bitbar
   module Thyme
-    class Status
+    class StatusPresenter
       attr_reader :status, :previous_status, :total_seconds_left
 
-      def initialize(path=File.expand_path('~/.thyme-bitbar.yml'))
-        @status, @total_seconds_left, @previous_status = ::Thyme::StatusFile.new(path).read
+      def initialize(hash)
+        @status = hash[:status]
+        @total_seconds_left = hash[:seconds_left]
+        @previous_status = hash[:previous_status]
       end
 
       def summary

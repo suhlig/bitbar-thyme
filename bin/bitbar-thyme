@@ -11,9 +11,12 @@
 # <bitbar.abouturl>http://github.com/suhlig/bitbar-thyme</bitbar.abouturl>
 
 require 'bitbar/thyme'
+require 'thyme/status_file'
 
-status = Bitbar::Thyme::Status.new
+path = File.expand_path('~/.thyme-bitbar.yml')
+hash = Thyme::StatusFile.new(path).load
+presenter = Bitbar::Thyme::StatusPresenter.new(hash)
 
-puts status.summary
+puts presenter.summary
 puts '---'
-puts status.details
+puts presenter.details

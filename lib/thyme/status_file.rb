@@ -7,10 +7,9 @@ module Thyme
       @store = YAML::Store.new(path)
     end
 
-    def read
+    def load
       store.transaction(true) do
-        thyme = store[:thyme]
-        [thyme[:status], thyme[:seconds_left], thyme[:previous_status]]
+        store[:thyme]
       end
     end
 

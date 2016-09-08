@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 require 'spec_helper'
+require 'yaml'
 
-describe Bitbar::Thyme::Status do
-  subject { Bitbar::Thyme::Status.new(status_file) }
+describe Bitbar::Thyme::StatusPresenter do
+  subject {
+    thyme = YAML.load_file(fixture(status_fixture))[:thyme]
+    Bitbar::Thyme::StatusPresenter.new(thyme)
+  }
 
   context 'within a pomodoro' do
-    let(:status_file) { fixture('pomodoro-863.yml') }
+    let(:status_fixture) { 'pomodoro-863.yml' }
 
     it 'exists' do
       expect(subject).to be
@@ -35,7 +39,7 @@ describe Bitbar::Thyme::Status do
   end
 
   context 'within a break' do
-    let(:status_file) { fixture('break-281.yml') }
+    let(:status_fixture) { 'break-281.yml' }
 
     it 'exists' do
       expect(subject).to be
@@ -66,7 +70,7 @@ describe Bitbar::Thyme::Status do
 
   context 'with zero seconds left' do
     context 'after a pomodoro' do
-      let(:status_file) { fixture('idle-after-pomodoro-0.yml') }
+      let(:status_fixture) { 'idle-after-pomodoro-0.yml' }
 
       it 'has the duration of the previous pomodoro' do
         expect(subject.previous_duration).to eq('25:00')
@@ -83,7 +87,7 @@ describe Bitbar::Thyme::Status do
     end
 
     context 'after a break' do
-      let(:status_file) { fixture('idle-after-break-0.yml') }
+      let(:status_fixture) { 'idle-after-break-0.yml' }
 
       it 'has the duration of the previous pomodoro' do
         expect(subject.previous_duration).to eq('5:00')
@@ -102,7 +106,7 @@ describe Bitbar::Thyme::Status do
 
   context 'with some seconds left' do
     context 'after a pomodoro' do
-      let(:status_file) { fixture('idle-after-pomodoro-247.yml') }
+      let(:status_fixture) { 'idle-after-pomodoro-247.yml' }
 
       it 'has the current status' do
         expect(subject.summary).to eq('Idle')
@@ -115,7 +119,7 @@ describe Bitbar::Thyme::Status do
     end
 
     context 'after a break' do
-      let(:status_file) { fixture('idle-after-break-142.yml') }
+      let(:status_fixture) { 'idle-after-break-142.yml' }
 
       it 'has the current status' do
         expect(subject.summary).to eq('Idle')
