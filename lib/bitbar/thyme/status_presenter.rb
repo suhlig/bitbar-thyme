@@ -28,7 +28,7 @@ module Bitbar
           if complete?
             "#{status} after #{previous_duration} of #{previous_status}"
           else
-            "#{status} after #{time_left} of #{previous_status}"
+            "#{status} after #{time_elapsed} of #{previous_status}"
           end
         when 'Pomodoro', 'Break'
           "#{status} running for #{time_elapsed}"
@@ -42,7 +42,11 @@ module Bitbar
       end
 
       def time_elapsed
-        "#{minutes_elapsed}:#{sprintf('%02d', seconds_elapsed)}"
+        if complete?
+          previous_duration
+        else
+          "#{minutes_elapsed}:#{sprintf('%02d', seconds_elapsed)}"
+        end
       end
 
       def minutes_elapsed
@@ -66,7 +70,13 @@ module Bitbar
       end
 
       def total_seconds_elapsed
-        total_duration - total_seconds_left
+        duration = if complete?
+                     total_duration(status)
+                   else
+                     total_duration(previous_status)
+                   end
+
+        duration - total_seconds_left
       end
 
       def total_duration(of=status)
