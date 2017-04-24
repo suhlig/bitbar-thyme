@@ -71,22 +71,24 @@ module Bitbar
 
       def total_seconds_elapsed
         duration = if complete?
-                     total_duration(status)
-                   else
                      total_duration(previous_status)
+                   else
+                     total_duration(status)
                    end
 
         duration - total_seconds_left
       end
 
-      def total_duration(of=status)
-        case of
+      def total_duration(st=duration_status)
+        case st
         when 'Pomodoro'
           25 * 60
         when 'Break'
           5 * 60
+        when 'Idle'
+          total_duration(previous_status)
         else
-          0
+          raise "#{st} has no duration"
         end
       end
 
@@ -95,6 +97,17 @@ module Bitbar
         minutes = total / 60
         seconds = total % 60
         "#{minutes}:#{sprintf('%02d', seconds)}"
+      end
+
+      private
+
+      def duration_status
+        case status
+        when 'Pomodoro', 'Break'
+          status
+        else
+          previous_status
+        end
       end
     end
   end
