@@ -1,4 +1,5 @@
 # frozen_string_literal: true
+
 require 'thyme/status_file'
 
 module Thyme
@@ -13,12 +14,10 @@ module Thyme
     end
 
     # code to run when thyme starts up
-    def before_all
-    end
+    def before_all; end
 
     # code to run when timer starts
-    def before
-    end
+    def before; end
 
     def tick(seconds_left)
       @status_file.write(status, seconds_left, status)

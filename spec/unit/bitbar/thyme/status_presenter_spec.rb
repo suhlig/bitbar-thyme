@@ -3,6 +3,7 @@
 require 'spec_helper'
 require 'yaml'
 
+# rubocop:disable Metrics/BlockLength
 describe Bitbar::Thyme::StatusPresenter do
   subject(:status) {
     thyme = YAML.load_file(fixture(status_fixture))[:thyme]

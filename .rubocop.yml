@@ -9,6 +9,16 @@ AllCops:
     - vendor/**/*
     - db/migrations/**/*
 
+  DisplayCopNames:
+    Enabled: true
+
+  DisplayStyleGuide:
+    Enabled: true
+
+Style/FileName:
+  Exclude:
+  - Guardfile
+  
 Lint/AmbiguousRegexpLiteral:
   Enabled: false
 
