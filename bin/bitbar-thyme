@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+#
+# <bitbar.title>Thyme</bitbar.title>
+# <bitbar.version>v1.0</bitbar.version>
+# <bitbar.author>Steffen Uhlig</bitbar.author>
+# <bitbar.author.github>suhlig</bitbar.author.github>
+# <bitbar.desc>Bitbar + Thyme integration</bitbar.desc>
+# <bitbar.dependencies>ruby</bitbar.dependencies>
+# <bitbar.image>https://raw.githubusercontent.com/suhlig/bitbar-thyme/master/screenshot.png</bitbar.image>
+# <bitbar.abouturl>http://github.com/suhlig/bitbar-thyme</bitbar.abouturl>
+
+$LOAD_PATH.unshift File.join(__dir__, '..', 'lib')
+
+require 'bitbar/thyme'
+
+status = Bitbar::Thyme::Status.new
+
+puts status.summary
+puts '---'
+puts status.details
