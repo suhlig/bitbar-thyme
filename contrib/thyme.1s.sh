@@ -2,6 +2,6 @@
 
 export PATH=/usr/local/bin:$PATH
 source $(brew --prefix)/share/chruby/chruby.sh
-chruby 2.3.1
+chruby 2.4.1
 
 bitbar-thyme

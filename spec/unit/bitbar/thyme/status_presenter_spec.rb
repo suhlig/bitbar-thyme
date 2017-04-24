@@ -4,7 +4,6 @@ require 'spec_helper'
 require 'yaml'
 
 describe Bitbar::Thyme::StatusPresenter do
-
   subject(:status) {
     thyme = YAML.load_file(fixture(status_fixture))[:thyme]
     Bitbar::Thyme::StatusPresenter.new(thyme)

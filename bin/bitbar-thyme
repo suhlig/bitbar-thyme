@@ -2,7 +2,7 @@
 # frozen_string_literal: true
 
 # <bitbar.title>Thyme</bitbar.title>
-# <bitbar.version>v1.0</bitbar.version>
+# <bitbar.version>v0.2.0</bitbar.version>
 # <bitbar.author>Steffen Uhlig</bitbar.author>
 # <bitbar.author.github>suhlig</bitbar.author.github>
 # <bitbar.desc>Bitbar + Thyme integration</bitbar.desc>
@@ -20,3 +20,4 @@ presenter = Bitbar::Thyme::StatusPresenter.new(hash)
 puts presenter.summary
 puts '---'
 puts presenter.details
+puts "#{File.basename(__FILE__)} v#{Bitbar::Thyme::VERSION}"
