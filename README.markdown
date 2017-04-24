@@ -1,5 +1,7 @@
 # Bitbar + Thyme Integration
 
+[![Build Status](https://travis-ci.org/suhlig/bitbar-thyme.svg?branch=master)](https://travis-ci.org/suhlig/bitbar-thyme)
+
 This gem shows the current [Thyme](https://github.com/hughbien/thyme) status in [Bitbar](https://getbitbar.com/). It consists of two parts:
 
 1. A plugin for Thyme that, on every tick, writes the status to a file, and
